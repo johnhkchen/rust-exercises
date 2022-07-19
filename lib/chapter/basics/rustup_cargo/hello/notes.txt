@@ -1,0 +1,3 @@
+As a showcase of the simplest parts of Rust, we implement Euclid's GCD algorithm, and add CLI support.
+
+> cargo create hello
