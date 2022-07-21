@@ -1,6 +1,4 @@
-use warp::{Filter, http::Response};
-
-
+use warp::{http::Response, Filter};
 
 #[tokio::main]
 async fn main() {
@@ -15,7 +13,7 @@ async fn main() {
                         <input type="text" name="" />
                         <button type="submit">Compute GCD</button>
                     </form>
-                "#
+                "#,
             )
     });
 
