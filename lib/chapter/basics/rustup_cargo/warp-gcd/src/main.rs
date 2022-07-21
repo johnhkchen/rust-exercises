@@ -1,12 +1,23 @@
-use warp::Filter;
+use warp::{Filter, http::Response};
+
+
 
 #[tokio::main]
 async fn main() {
-    // GET /hello/warp => 200 OK with body "Hello, warp!"
-    let hello = warp::path!("hello" / String)
-        .map(|name| format!("Hello, {}!", name));
+    let custom = warp::any().map(|| {
+        Response::builder()
+            .header("my-custom-header", "some-value")
+            .body(
+                r#"
+                    <title>GCD Calculator</title>
+                    <form action="/gcd" method="post">
+                        <input type="text" name="" />
+                        <input type="text" name="" />
+                        <button type="submit">Compute GCD</button>
+                    </form>
+                "#
+            )
+    });
 
-    warp::serve(hello)
-        .run(([127, 0, 0, 1], 3030))
-        .await;
+    warp::serve(custom).run(([127, 0, 0, 1], 3030)).await;
 }
